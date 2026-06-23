@@ -27,11 +27,11 @@ export function useCarEngine(
   const start = useCallback(() => {
     if (status !== 'idle') return;
     cancelledRef.current = false;
-    dispatch(setCarStatus({ id, status: 'driving' }));
 
     startEngine(id)
       .then(({ velocity, distance }) => {
         if (cancelledRef.current) return;
+        dispatch(setCarStatus({ id, status: 'driving' }));
         const car = carRef.current;
         const track = trackRef.current;
         if (car && track) animateCarToFinish(car, track, distance / velocity);
@@ -44,9 +44,7 @@ export function useCarEngine(
           }
         });
       })
-      .catch(() => {
-        if (!cancelledRef.current) dispatch(setCarStatus({ id, status: 'idle' }));
-      });
+      .catch(() => {});
   }, [id, status, dispatch, carRef, trackRef]);
 
   const stop = useCallback(() => {

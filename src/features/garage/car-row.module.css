@@ -40,7 +40,7 @@
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translateX(0) translateY(-50%);
+  translate: 0 -50%;
   will-change: transform;
 }
 

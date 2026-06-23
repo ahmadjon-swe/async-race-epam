@@ -13,15 +13,17 @@ export function WinnersView() {
 
   useEffect(() => {
     getWinners(page, sort, order)
-      .then(async ({ items, total: t }) => {
-        const rows: WinnerRow[] = await Promise.all(
-          items.map(async (w) => {
-            const car = await getCar(w.id);
-            return { ...w, name: car.name, color: car.color };
-          }),
-        );
-        dispatch(setWinners({ items: rows, total: t }));
-      })
+      .then(({ items, total: t }) =>
+        Promise.all(
+          items.map((w) =>
+            getCar(w.id)
+              .then((car): WinnerRow => ({ ...w, name: car.name, color: car.color }))
+              .catch(() => null),
+          ),
+        ).then((rows) => {
+          dispatch(setWinners({ items: rows.filter((r): r is WinnerRow => r !== null), total: t }));
+        }),
+      )
       .catch(() => {});
   }, [page, sort, order, dispatch]);
 

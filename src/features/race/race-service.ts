@@ -20,27 +20,19 @@ export function raceSingleCar(
   trackEl: HTMLElement | null,
   dispatch: AppDispatch,
 ): Promise<RaceResult> {
-  dispatch(setCarStatus({ id, status: 'driving' }));
+  return startEngine(id).then(({ velocity, distance }) => {
+    dispatch(setCarStatus({ id, status: 'driving' }));
+    const durationMs = distance / velocity;
+    if (carEl && trackEl) animateCarToFinish(carEl, trackEl, durationMs);
 
-  return startEngine(id)
-    .then(({ velocity, distance }) => {
-      const durationMs = distance / velocity;
-      if (carEl && trackEl) animateCarToFinish(carEl, trackEl, durationMs);
-
-      return driveEngine(id)
-        .then(() => ({ id, timeSec: durationMs / 1000 }))
-        .catch((err: Error & { status?: number }) => {
-          if (carEl) freezeCarAtCurrentPosition(carEl);
-          dispatch(setCarStatus({ id, status: 'broken' }));
-          throw err;
-        });
-    })
-    .catch((err: Error & { status?: number }) => {
-      if (err.status !== 500) {
-        dispatch(setCarStatus({ id, status: 'idle' }));
-      }
-      throw err;
-    });
+    return driveEngine(id)
+      .then(() => ({ id, timeSec: durationMs / 1000 }))
+      .catch((err: Error & { status?: number }) => {
+        if (carEl) freezeCarAtCurrentPosition(carEl);
+        dispatch(setCarStatus({ id, status: 'broken' }));
+        throw err;
+      });
+  });
 }
 
 export function stopAllCars(

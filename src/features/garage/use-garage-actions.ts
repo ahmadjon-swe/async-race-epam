@@ -30,6 +30,10 @@ export function useGarageActions(
     deleteCar(id)
       .then(() => deleteWinner(id).catch(() => {}))
       .then(() => {
+        const carMap = carRefs.current;
+        const trackMap = trackRefs.current;
+        delete carMap[id];
+        delete trackMap[id];
         const next = cars.length === 1 && page > 1 ? page - 1 : page;
         if (next !== page) dispatch(setPage(next));
         else loadPage(page);
@@ -63,7 +67,9 @@ export function useGarageActions(
           persistWinner(id, timeSec).catch(() => {});
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        dispatch(resetRace());
+      });
   };
 
   const handleResetRace = () => {
