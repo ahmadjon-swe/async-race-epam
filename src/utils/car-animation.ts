@@ -1,8 +1,4 @@
-export function animateCarToFinish(
-  car: HTMLElement,
-  track: HTMLElement,
-  durationMs: number,
-): void {
+export function animateCarToFinish(car: HTMLElement, track: HTMLElement, durationMs: number): void {
   const finishX = track.clientWidth - car.offsetWidth - 10;
   car.style.transition = `transform ${durationMs}ms linear`;
   car.style.transform = `translateX(${finishX}px)`;

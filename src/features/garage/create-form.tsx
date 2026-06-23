@@ -41,11 +41,7 @@ export function CreateForm({ onCreated, disabled }: CreateFormProps) {
         onChange={(e) => dispatch(setCreateForm({ color: e.target.value }))}
         disabled={disabled}
       />
-      <button
-        className={styles.submitBtn}
-        type="submit"
-        disabled={disabled || !name.trim()}
-      >
+      <button className={styles.submitBtn} type="submit" disabled={disabled || !name.trim()}>
         Create
       </button>
     </form>

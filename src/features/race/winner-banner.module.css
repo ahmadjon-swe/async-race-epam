@@ -16,8 +16,14 @@
 }
 
 @keyframes pop {
-  from { transform: translateX(-50%) scale(0.8); opacity: 0; }
-  to   { transform: translateX(-50%) scale(1);   opacity: 1; }
+  from {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
 }
 
 @media (max-width: 500px) {

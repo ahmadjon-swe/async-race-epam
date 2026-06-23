@@ -30,16 +30,36 @@ export function CarRow({ car, carRef, trackRef, onDelete, disabled }: CarRowProp
   return (
     <div className={`${styles.row} ${isSelected ? styles.selected : ''}`}>
       <div className={styles.controls}>
-        <button type="button" className={styles.startBtn} onClick={start} disabled={disabled || isDriving}>
+        <button
+          type="button"
+          className={styles.startBtn}
+          onClick={start}
+          disabled={disabled || isDriving}
+        >
           A
         </button>
-        <button type="button" className={styles.stopBtn} onClick={stop} disabled={disabled || status === 'idle'}>
+        <button
+          type="button"
+          className={styles.stopBtn}
+          onClick={stop}
+          disabled={disabled || status === 'idle'}
+        >
           B
         </button>
-        <button type="button" className={styles.selectBtn} onClick={handleSelect} disabled={disabled}>
+        <button
+          type="button"
+          className={styles.selectBtn}
+          onClick={handleSelect}
+          disabled={disabled}
+        >
           Select
         </button>
-        <button type="button" className={styles.deleteBtn} onClick={() => onDelete(car.id)} disabled={disabled}>
+        <button
+          type="button"
+          className={styles.deleteBtn}
+          onClick={() => onDelete(car.id)}
+          disabled={disabled}
+        >
           Remove
         </button>
         <span className={styles.name}>{car.name}</span>

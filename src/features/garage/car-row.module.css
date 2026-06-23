@@ -64,27 +64,35 @@
   font-weight: 700;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: opacity 0.15s, background 0.15s;
+  transition:
+    opacity 0.15s,
+    background 0.15s;
 }
 
 .startBtn {
   background: #16a34a;
   color: #fff;
 }
-.startBtn:hover:not(:disabled) { background: #15803d; }
+.startBtn:hover:not(:disabled) {
+  background: #15803d;
+}
 
 .stopBtn {
   background: #dc2626;
   color: #fff;
 }
-.stopBtn:hover:not(:disabled) { background: #b91c1c; }
+.stopBtn:hover:not(:disabled) {
+  background: #b91c1c;
+}
 
 .selectBtn {
   background: #2a2a4e;
   color: #f0f0f0;
   border-color: #555;
 }
-.selectBtn:hover:not(:disabled) { background: #3a3a6e; }
+.selectBtn:hover:not(:disabled) {
+  background: #3a3a6e;
+}
 
 .deleteBtn {
   background: transparent;
@@ -105,6 +113,10 @@
 }
 
 @media (max-width: 500px) {
-  .track { height: 44px; }
-  .name { font-size: 0.85rem; }
+  .track {
+    height: 44px;
+  }
+  .name {
+    font-size: 0.85rem;
+  }
 }

@@ -11,9 +11,7 @@ function AppShell() {
   return (
     <div className={styles.shell}>
       <Nav />
-      <main className={styles.main}>
-        {view === 'garage' ? <GarageView /> : <WinnersView />}
-      </main>
+      <main className={styles.main}>{view === 'garage' ? <GarageView /> : <WinnersView />}</main>
     </div>
   );
 }

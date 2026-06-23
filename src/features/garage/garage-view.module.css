@@ -64,8 +64,13 @@
   cursor: pointer;
   transition: background 0.15s;
 }
-.raceBtn:hover:not(:disabled) { background: #c73550; }
-.raceBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.raceBtn:hover:not(:disabled) {
+  background: #c73550;
+}
+.raceBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
 .resetBtn {
   padding: 0.45rem 1.4rem;
@@ -78,8 +83,13 @@
   cursor: pointer;
   transition: background 0.15s;
 }
-.resetBtn:hover:not(:disabled) { background: #3a3a6e; }
-.resetBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.resetBtn:hover:not(:disabled) {
+  background: #3a3a6e;
+}
+.resetBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
 .carList {
   min-height: 100px;
