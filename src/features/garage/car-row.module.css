@@ -1,75 +1,110 @@
 .row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 0.6rem 0;
   border-bottom: 1px solid #2a2a4e;
+  padding: 0.5rem 0;
 }
 
 .row.selected {
-  background: rgba(233, 69, 96, 0.05);
   border-left: 3px solid #e94560;
   padding-left: 0.5rem;
+  background: rgba(233, 69, 96, 0.04);
 }
 
 .controls {
   display: flex;
-  gap: 0.5rem;
-}
-
-.track {
-  display: flex;
   align-items: center;
-  gap: 1rem;
-  min-width: 0;
-}
-
-.carWrap {
-  flex-shrink: 0;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
 }
 
 .name {
   font-size: 0.95rem;
-  color: #f0f0f0;
   font-weight: 500;
-  truncate: ellipsis;
-  overflow: hidden;
+  color: #f0f0f0;
+  margin-left: 0.25rem;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background: #141428;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.movingCar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateX(0) translateY(-50%);
+  will-change: transform;
+}
+
+.finish {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* Engine buttons */
+.startBtn,
+.stopBtn,
+.selectBtn,
+.deleteBtn {
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.startBtn {
+  background: #16a34a;
+  color: #fff;
+}
+.startBtn:hover:not(:disabled) { background: #15803d; }
+
+.stopBtn {
+  background: #dc2626;
+  color: #fff;
+}
+.stopBtn:hover:not(:disabled) { background: #b91c1c; }
 
 .selectBtn {
-  padding: 0.25rem 0.75rem;
   background: #2a2a4e;
   color: #f0f0f0;
-  border: 1px solid #555;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: background 0.15s;
+  border-color: #555;
 }
-
-.selectBtn:hover:not(:disabled) {
-  background: #3a3a6e;
-}
+.selectBtn:hover:not(:disabled) { background: #3a3a6e; }
 
 .deleteBtn {
-  padding: 0.25rem 0.75rem;
   background: transparent;
   color: #e94560;
-  border: 1px solid #e94560;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  border-color: #e94560;
 }
-
 .deleteBtn:hover:not(:disabled) {
   background: #e94560;
   color: #fff;
 }
 
+.startBtn:disabled,
+.stopBtn:disabled,
 .selectBtn:disabled,
 .deleteBtn:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
+}
+
+@media (max-width: 500px) {
+  .track { height: 44px; }
+  .name { font-size: 0.85rem; }
 }

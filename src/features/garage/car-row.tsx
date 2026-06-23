@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import type { Car } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setSelectedId } from '../../state/garage-slice';
 import { setUpdateForm } from '../../state/form-slice';
 import { CarIcon } from '../../components/car-icon';
+import { useCarEngine } from './use-car-engine';
 import styles from './car-row.module.css';
 
 interface CarRowProps {
@@ -16,6 +18,12 @@ export function CarRow({ car, onDelete, disabled }: CarRowProps) {
   const selectedId = useAppSelector((state) => state.garage.selectedId);
   const isSelected = selectedId === car.id;
 
+  const carRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const { status, start, stop } = useCarEngine(car.id, carRef, trackRef);
+
+  const isDriving = status === 'driving' || status === 'broken';
+
   const handleSelect = () => {
     dispatch(setSelectedId(car.id));
     dispatch(setUpdateForm({ name: car.name, color: car.color }));
@@ -24,28 +32,26 @@ export function CarRow({ car, onDelete, disabled }: CarRowProps) {
   return (
     <div className={`${styles.row} ${isSelected ? styles.selected : ''}`}>
       <div className={styles.controls}>
-        <button
-          type="button"
-          className={styles.selectBtn}
-          onClick={handleSelect}
-          disabled={disabled}
-        >
+        <button type="button" className={styles.startBtn} onClick={start} disabled={disabled || isDriving}>
+          A
+        </button>
+        <button type="button" className={styles.stopBtn} onClick={stop} disabled={disabled || status === 'idle'}>
+          B
+        </button>
+        <button type="button" className={styles.selectBtn} onClick={handleSelect} disabled={disabled || isDriving}>
           Select
         </button>
-        <button
-          type="button"
-          className={styles.deleteBtn}
-          onClick={() => onDelete(car.id)}
-          disabled={disabled}
-        >
+        <button type="button" className={styles.deleteBtn} onClick={() => onDelete(car.id)} disabled={disabled || isDriving}>
           Remove
         </button>
-      </div>
-      <div className={styles.track}>
-        <div className={styles.carWrap}>
-          <CarIcon color={car.color} />
-        </div>
         <span className={styles.name}>{car.name}</span>
+      </div>
+
+      <div className={styles.track} ref={trackRef}>
+        <div className={styles.movingCar} ref={carRef}>
+          <CarIcon color={car.color} width={80} />
+        </div>
+        <div className={styles.finish}>🏁</div>
       </div>
     </div>
   );

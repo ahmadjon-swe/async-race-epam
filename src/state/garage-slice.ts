@@ -2,11 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { Car } from '../types';
 
+export type CarEngineStatus = 'idle' | 'driving' | 'broken';
+
 interface GarageState {
   cars: Car[];
   total: number;
   page: number;
   selectedId: number | null;
+  carStates: Record<number, CarEngineStatus>;
 }
 
 const initialState: GarageState = {
@@ -14,6 +17,7 @@ const initialState: GarageState = {
   total: 0,
   page: 1,
   selectedId: null,
+  carStates: {},
 };
 
 const garageSlice = createSlice({
@@ -30,8 +34,15 @@ const garageSlice = createSlice({
     setSelectedId(state, action: PayloadAction<number | null>) {
       state.selectedId = action.payload;
     },
+    setCarStatus(state, action: PayloadAction<{ id: number; status: CarEngineStatus }>) {
+      state.carStates[action.payload.id] = action.payload.status;
+    },
+    resetAllCarStates(state) {
+      state.carStates = {};
+    },
   },
 });
 
-export const { setCars, setPage, setSelectedId } = garageSlice.actions;
+export const { setCars, setPage, setSelectedId, setCarStatus, resetAllCarStates } =
+  garageSlice.actions;
 export default garageSlice.reducer;

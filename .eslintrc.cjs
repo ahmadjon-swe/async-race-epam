@@ -26,7 +26,7 @@ module.exports = {
     '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     // RTK slices use Immer — direct state mutation is intentional
-    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
+    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state', 'car'] }],
     // defaultProps are deprecated in modern React; TS default params cover this
     'react/require-default-props': 'off',
   },
