@@ -1,0 +1,33 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  padding: 0.4rem 1.2rem;
+  background: #2a2a4e;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.btn:hover:not(:disabled) {
+  background: #3a3a6e;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.info {
+  color: #aaa;
+  font-size: 0.9rem;
+  min-width: 100px;
+  text-align: center;
+}

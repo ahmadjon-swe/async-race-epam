@@ -1,0 +1,75 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #2a2a4e;
+}
+
+.row.selected {
+  background: rgba(233, 69, 96, 0.05);
+  border-left: 3px solid #e94560;
+  padding-left: 0.5rem;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.carWrap {
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  font-weight: 500;
+  truncate: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.selectBtn {
+  padding: 0.25rem 0.75rem;
+  background: #2a2a4e;
+  color: #f0f0f0;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.selectBtn:hover:not(:disabled) {
+  background: #3a3a6e;
+}
+
+.deleteBtn {
+  padding: 0.25rem 0.75rem;
+  background: transparent;
+  color: #e94560;
+  border: 1px solid #e94560;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.deleteBtn:hover:not(:disabled) {
+  background: #e94560;
+  color: #fff;
+}
+
+.selectBtn:disabled,
+.deleteBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

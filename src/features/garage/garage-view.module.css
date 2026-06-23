@@ -1,11 +1,12 @@
 .view {
-  padding: 2rem;
+  padding: 1.5rem 2rem;
+  max-width: 900px;
 }
 
 .title {
   font-size: 2rem;
   color: #e94560;
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.2rem;
 }
 
 .count {
@@ -13,8 +14,30 @@
   color: #aaa;
 }
 
-.page {
+.pageLabel {
   color: #888;
-  font-size: 0.95rem;
-  margin: 0;
+  font-size: 0.9rem;
+  margin: 0 0 1.25rem;
+}
+
+.forms {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #2a2a4e;
+  padding-bottom: 1.25rem;
+}
+
+.carList {
+  min-height: 100px;
+}
+
+.empty {
+  color: #666;
+  font-style: italic;
+  padding: 2rem 0;
+}
+
+@media (max-width: 500px) {
+  .view {
+    padding: 1rem;
+  }
 }
