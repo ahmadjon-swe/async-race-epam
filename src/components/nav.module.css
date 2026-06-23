@@ -31,3 +31,9 @@
   background: #e94560;
   color: #fff;
 }
+
+.link:disabled,
+.active:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
