@@ -1,9 +1,10 @@
 import { useEffect, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCars, setPage, setSelectedId } from '../../state/garage-slice';
-import { getCars, deleteCar } from '../../api/garage';
+import { getCars, deleteCar, createCar } from '../../api/garage';
 import { deleteWinner } from '../../api/winners';
-import { CARS_PER_PAGE } from '../../utils/constants';
+import { CARS_PER_PAGE, GENERATE_COUNT } from '../../utils/constants';
+import { randomCarName, randomCarColor } from '../../utils/random-car';
 import { CreateForm } from './create-form';
 import { UpdateForm } from './update-form';
 import { CarRow } from './car-row';
@@ -29,6 +30,15 @@ export function GarageView() {
   useEffect(() => {
     loadPage(page);
   }, [page, loadPage]);
+
+  const handleGenerate = () => {
+    const requests = Array.from({ length: GENERATE_COUNT }, () =>
+      createCar(randomCarName(), randomCarColor()),
+    );
+    Promise.all(requests)
+      .then(() => loadPage(page))
+      .catch(() => {});
+  };
 
   const handleDelete = (id: number) => {
     if (id === selectedId) dispatch(setSelectedId(null));
@@ -56,6 +66,14 @@ export function GarageView() {
       <div className={styles.forms}>
         <CreateForm onCreated={() => loadPage(page)} disabled={isRacing} />
         <UpdateForm onUpdated={() => loadPage(page)} disabled={isRacing} />
+        <button
+          type="button"
+          className={styles.generateBtn}
+          onClick={handleGenerate}
+          disabled={isRacing}
+        >
+          Generate 100 Cars
+        </button>
       </div>
 
       <div className={styles.carList}>

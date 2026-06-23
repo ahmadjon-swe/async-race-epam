@@ -26,6 +26,27 @@
   padding-bottom: 1.25rem;
 }
 
+.generateBtn {
+  padding: 0.4rem 1.2rem;
+  background: #2a2a4e;
+  color: #f0f0f0;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: 0.25rem;
+}
+
+.generateBtn:hover:not(:disabled) {
+  background: #3a3a6e;
+}
+
+.generateBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .carList {
   min-height: 100px;
 }
