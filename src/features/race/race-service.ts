@@ -36,7 +36,7 @@ export function raceSingleCar(
         });
     })
     .catch((err: Error & { status?: number }) => {
-      if (err.message !== 'engine broken') {
+      if (err.status !== 500) {
         dispatch(setCarStatus({ id, status: 'idle' }));
       }
       throw err;
