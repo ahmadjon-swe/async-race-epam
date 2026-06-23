@@ -4,6 +4,7 @@ import { setWinners } from '../../state/winners-slice';
 import { getWinners } from '../../api/winners';
 import { getCar } from '../../api/garage';
 import type { WinnerRow } from '../../types';
+import { WinnersTable } from './winners-table';
 import styles from './winners-view.module.css';
 
 export function WinnersView() {
@@ -29,7 +30,8 @@ export function WinnersView() {
       <h1 className={styles.title}>
         Winners <span className={styles.count}>({total})</span>
       </h1>
-      <p className={styles.page}>Page #{page}</p>
+      <p className={styles.pageLabel}>Page #{page}</p>
+      <WinnersTable />
     </div>
   );
 }
