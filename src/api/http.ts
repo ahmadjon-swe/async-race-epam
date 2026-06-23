@@ -12,9 +12,9 @@ interface RequestOptions {
 function buildUrl(path: string, params?: Record<string, string | number>): string {
   const url = new URL(`${BASE_URL}${path}`);
   if (params) {
-    for (const [key, value] of Object.entries(params)) {
+    Object.entries(params).forEach(([key, value]) => {
       url.searchParams.set(key, String(value));
-    }
+    });
   }
   return url.toString();
 }

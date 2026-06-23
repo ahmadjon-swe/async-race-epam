@@ -1,16 +1,19 @@
 import { useEffect } from 'react';
-import { useAppState } from '../../state/use-app-state';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { setCars } from '../../state/garage-slice';
 import { getCars } from '../../api/garage';
 import styles from './garage-view.module.css';
 
 export function GarageView() {
-  const { state, dispatch } = useAppState();
-  const { page, total } = state.garage;
+  const dispatch = useAppDispatch();
+  const { page, total } = useAppSelector((state) => state.garage);
 
   useEffect(() => {
-    void getCars(page).then(({ items, total: t }) => {
-      dispatch({ type: 'SET_GARAGE_DATA', payload: { cars: items, total: t } });
-    });
+    getCars(page)
+      .then(({ items, total: t }) => {
+        dispatch(setCars({ cars: items, total: t }));
+      })
+      .catch(() => {});
   }, [page, dispatch]);
 
   return (

@@ -1,22 +1,24 @@
-import { useAppState } from '../state/use-app-state';
+import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { setView } from '../state/view-slice';
 import styles from './nav.module.css';
 
 export function Nav() {
-  const { state, dispatch } = useAppState();
+  const dispatch = useAppDispatch();
+  const view = useAppSelector((state) => state.view);
 
   return (
     <nav className={styles.nav}>
       <button
         type="button"
-        className={state.view === 'garage' ? styles.active : styles.link}
-        onClick={() => dispatch({ type: 'SET_VIEW', payload: 'garage' })}
+        className={view === 'garage' ? styles.active : styles.link}
+        onClick={() => dispatch(setView('garage'))}
       >
         Garage
       </button>
       <button
         type="button"
-        className={state.view === 'winners' ? styles.active : styles.link}
-        onClick={() => dispatch({ type: 'SET_VIEW', payload: 'winners' })}
+        className={view === 'winners' ? styles.active : styles.link}
+        onClick={() => dispatch(setView('winners'))}
       >
         Winners
       </button>

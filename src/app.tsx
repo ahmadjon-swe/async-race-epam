@@ -1,17 +1,18 @@
-import { AppProvider } from './state/context';
-import { useAppState } from './state/use-app-state';
+import { Provider } from 'react-redux';
+import { store } from './state/store';
 import { Nav } from './components/nav';
 import { GarageView } from './features/garage/garage-view';
 import { WinnersView } from './features/winners/winners-view';
+import { useAppSelector } from './state/hooks';
 import styles from './app.module.css';
 
 function AppShell() {
-  const { state } = useAppState();
+  const view = useAppSelector((state) => state.view);
   return (
     <div className={styles.shell}>
       <Nav />
       <main className={styles.main}>
-        {state.view === 'garage' ? <GarageView /> : <WinnersView />}
+        {view === 'garage' ? <GarageView /> : <WinnersView />}
       </main>
     </div>
   );
@@ -19,9 +20,9 @@ function AppShell() {
 
 function App() {
   return (
-    <AppProvider>
+    <Provider store={store}>
       <AppShell />
-    </AppProvider>
+    </Provider>
   );
 }
 
