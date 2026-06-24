@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCreateForm } from '../../state/form-slice';
 import { createCar } from '../../api/garage';
+import { CarIcon } from '../../components/car-icon';
 import styles from './car-form.module.css';
 
 interface CreateFormProps {
@@ -25,6 +26,7 @@ export function CreateForm({ onCreated, disabled }: CreateFormProps) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      <CarIcon color={color} width={40} />
       <input
         className={styles.nameInput}
         type="text"

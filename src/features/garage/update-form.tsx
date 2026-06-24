@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setUpdateForm } from '../../state/form-slice';
 import { setSelectedId } from '../../state/garage-slice';
 import { updateCar } from '../../api/garage';
+import { CarIcon } from '../../components/car-icon';
 import styles from './car-form.module.css';
 
 interface UpdateFormProps {
@@ -29,6 +30,7 @@ export function UpdateForm({ onUpdated, disabled }: UpdateFormProps) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      <CarIcon color={color} width={40} />
       <input
         className={styles.nameInput}
         type="text"
